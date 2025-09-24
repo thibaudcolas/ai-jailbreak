@@ -13,25 +13,25 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 })
 
-async function extractRecipeFromHtml() {  
+async function extractRecipeFromHtml() {
   try {
     const htmlPath = path.join(process.cwd(), 'index.html')
-    
+
     if (!fs.existsSync(htmlPath)) {
       console.error('❌ index.html not found in current directory')
       process.exit(1)
     }
-    
+
     const htmlContent = fs.readFileSync(htmlPath, 'utf-8')
-    
+
     const recipe = await analyzeHtmlForRecipe(htmlContent)
-    
+
     const outputPath = path.join(process.cwd(), 'extracted-recipe.txt')
     fs.writeFileSync(outputPath, recipe)
-    
+
     console.log(`\x1b[1m\x1b[32mRecipe extracted!\x1b[0m`)
     console.log(`Saved to: \x1b[3m\x1b[90m${outputPath}\x1b[0m`)
-    
+
   } catch (error) {
     console.error('❌ Failed to extract recipe:', error.message)
     process.exit(1)
@@ -54,9 +54,9 @@ ${htmlContent}`
 
   try {
     console.log('Extracting the recipe...')
-    
+
     const response = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: 'gpt-5',
       messages: [
         { role: 'system', content: systemPrompt },
         { role: 'user', content: userPrompt }
