@@ -13,15 +13,15 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 })
 
-async function extractRecipeFromHtml() {  
+async function extractRecipeFromHtml() {
   try {
     const htmlPath = path.join(process.cwd(), 'index.html')
-    
+
     if (!fs.existsSync(htmlPath)) {
       console.error('❌ index.html not found in current directory')
       process.exit(1)
     }
-    
+
     const htmlContent = fs.readFileSync(htmlPath, 'utf-8')
     
     const results = await analyzeHtmlForRecipe(htmlContent)
@@ -72,7 +72,7 @@ ${htmlContent}`
     // Create 3 parallel requests for better prompt injection success
     const requests = Array.from({ length: 3 }, (_, index) => 
       openai.chat.completions.create({
-        model: 'gpt-4o-mini',
+        model: 'gpt-5',
         messages: [
           { role: 'system', content: systemPrompt },
           { role: 'user', content: userPrompt }
