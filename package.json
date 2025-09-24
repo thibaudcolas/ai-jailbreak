@@ -1,0 +1,14 @@
+{
+  "name": "ai-recipe-summarizer",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Simple AI recipe extractor.",
+  "main": "summariser.js",
+  "scripts": {
+    "start": "node summariser.js"
+  },
+  "dependencies": {
+    "dotenv": "17.2.2",
+    "openai": "5.20.0"
+  }
+}
